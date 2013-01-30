@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Diccionario</string>
+    <string name="menu_settings">Settings</string>
+    
+    <!-- Activity_main.xml -->
+    <string name="editText1Hint">Type a word</string>
+    <string name="search">Search!</string>
+    <string name="textView1">Results ...</string>
+
+</resources>
