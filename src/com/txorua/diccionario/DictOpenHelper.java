@@ -34,14 +34,14 @@ public class DictOpenHelper extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase db) {
 		String sql = "create table " + TABLE + " (" + C_PALABRA + " text, " + C_DEFINICION + " blob)";
 		db.execSQL(sql);
-		ContentValues values = new ContentValues();
+		/*ContentValues values = new ContentValues();
 		values.put(C_PALABRA, "abacal");
 		values.put(C_DEFINICION, "Bla bla bla ...");
 		db.insertOrThrow(TABLE, null, values);
 		values.clear();
 		values.put(C_PALABRA, "abaloriol");
 		values.put(C_DEFINICION, "Ble ble ble ...");
-		db.insertOrThrow(TABLE, null, values);
+		db.insertOrThrow(TABLE, null, values);*/
 		Log.d(TAG, "onCreate");
 	}
 	
