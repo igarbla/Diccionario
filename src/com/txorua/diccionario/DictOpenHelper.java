@@ -14,41 +14,24 @@ public class DictOpenHelper extends SQLiteOpenHelper {
 	
 	static final String TAG = "DictOpenHelper";
 	static final String DB_NAME = "rae.db";
-	static final int DB_VERSION = 4;
+	static final int DB_VERSION = 5;
 	static final String TABLE = "palabras";
 	static final String C_PALABRA = "palabra";
 	static final String C_DEFINICION = "definicion";
 	Context context;
 	
-	public DictOpenHelper(Context context) {
-		super(context, DB_NAME, null, DB_VERSION);
+	public DictOpenHelper(Context context) {				
+		//super(context, DB_NAME, null, DB_VERSION);
+		//super(context, context.getExternalFilesDir(null).getAbsolutePath() + "/" + DB_NAME, null, DB_VERSION);
+		super(context, Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + DB_NAME, null, DB_VERSION);
 		this.context = context;
 		Log.d(TAG, "constructor");
+		//Log.w(TAG, context.getExternalFilesDir(null).getAbsolutePath());
+		Log.w(TAG, Environment.getExternalStorageDirectory().getAbsolutePath());
 	}
 	
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		
-		boolean mExternalStorageAvailable = false;
-		boolean mExternalStorageWriteable = false;
-		String state = Environment.getExternalStorageState();
-
-		if (Environment.MEDIA_MOUNTED.equals(state)) {
-		    // We can read and write the media
-		    mExternalStorageAvailable = mExternalStorageWriteable = true;
-		} else if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
-		    // We can only read the media
-		    mExternalStorageAvailable = true;
-		    mExternalStorageWriteable = false;
-		} else {
-		    // Something else is wrong. It may be one of many other states, but all we need
-		    //  to know is we can neither read nor write
-		    mExternalStorageAvailable = mExternalStorageWriteable = false;
-		}
-		
-		File dbFile = new File(Environment.getExternalStorageDirectory(), DB_NAME);
-		dbFile.delete();
-		
 		String sql = "create table " + TABLE + " (" + C_PALABRA + " text, " + C_DEFINICION + " blob)";
 		db.execSQL(sql);
 		ContentValues values = new ContentValues();

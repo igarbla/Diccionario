@@ -1,7 +1,10 @@
 package com.txorua.diccionario;
 
+import java.io.File;
+
 import android.os.Bundle;
 import android.os.AsyncTask;
+import android.os.Environment;
 import android.app.Activity;
 import android.util.Log;
 import android.view.Menu;
@@ -28,6 +31,31 @@ public class MainActivity extends Activity implements OnClickListener {
 		textView = (TextView) findViewById(R.id.textView1);
 		
 		button.setOnClickListener(this);
+		
+		boolean mExternalStorageAvailable = false;
+		boolean mExternalStorageWriteable = false;
+		String state = Environment.getExternalStorageState();
+
+		// ????
+		if (Environment.MEDIA_MOUNTED.equals(state)) {
+		    // We can read and write the media
+		    mExternalStorageAvailable = mExternalStorageWriteable = true;
+		    Log.w(TAG, "Tengo acceso de escritura a la SD");
+		} else if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
+		    // We can only read the media
+		    mExternalStorageAvailable = true;
+		    mExternalStorageWriteable = false;
+		    Log.w(TAG, "Tengo acceso de lectura a la SD");
+		} else {
+		    // Something else is wrong. It may be one of many other states, but all we need
+		    //  to know is we can neither read nor write
+		    mExternalStorageAvailable = mExternalStorageWriteable = false;
+		    Log.w(TAG, "No tengo acceso a la SD");
+		}
+		
+		/*File dbFile = new File(Environment.getExternalStorageDirectory(), DB_NAME);
+		dbFile.delete();
+		*/
 		
 		myOpenHelper = new DictOpenHelper(this);
 
