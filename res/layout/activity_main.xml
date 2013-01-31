@@ -22,10 +22,22 @@
         android:layout_height="wrap_content"
         android:text="@string/search" />
 
-    <TextView
-        android:id="@+id/textView1"
+    <ScrollView
+        android:id="@+id/scrollView1"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:text="@string/textView1" />
+        android:layout_height="fill_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent" >
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:text="@string/textView1" />
+
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
