@@ -1,12 +1,9 @@
 package com.txorua.diccionario;
 
-import java.io.File;
-
 import android.os.Bundle;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.app.Activity;
-import android.content.pm.PackageManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -39,7 +36,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		
 		String state = Environment.getExternalStorageState();
 
-		// ????
+		// Comprobamos si está presente y el modo de acceso.
 		if (Environment.MEDIA_MOUNTED.equals(state)) {
 		    // We can read and write the media
 		    mExternalStorageAvailable = mExternalStorageWriteable = true;
