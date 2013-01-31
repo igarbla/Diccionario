@@ -50,7 +50,7 @@ public class DictOpenHelper extends SQLiteOpenHelper {
 		String sql = "drop table " + TABLE;
 		db.execSQL(sql);
 		onCreate(db);
-		Log.d(TAG, "onUpgrader");
+		Log.d(TAG, "onUpgrade");
 	}
 	
 	Palabra getPalabra(String query) {

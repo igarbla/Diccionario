@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.app.Activity;
+import android.content.pm.PackageManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -20,6 +21,9 @@ public class MainActivity extends Activity implements OnClickListener {
 	Button button;
 	TextView textView;
 	DictOpenHelper myOpenHelper;
+	
+	boolean mExternalStorageAvailable = false;
+	boolean mExternalStorageWriteable = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +36,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		
 		button.setOnClickListener(this);
 		
-		boolean mExternalStorageAvailable = false;
-		boolean mExternalStorageWriteable = false;
+		
 		String state = Environment.getExternalStorageState();
 
 		// ????
@@ -70,7 +73,13 @@ public class MainActivity extends Activity implements OnClickListener {
 	
 	public void onClick(View v) {
 		String query = editText.getText().toString();
-		new QueryTask().execute(query);
+		if(mExternalStorageAvailable) {
+			Log.d(TAG, Boolean.valueOf(mExternalStorageAvailable).toString());
+		    new QueryTask().execute(query);
+		} else {
+			Log.d(TAG, Boolean.valueOf(mExternalStorageAvailable).toString());
+			textView.setText("Sin acceso a la base de datos.");
+		}
 	}
 	
 	class QueryTask extends AsyncTask<String, Integer, String> {
